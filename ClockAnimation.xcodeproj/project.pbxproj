@@ -21,6 +21,8 @@
 		AE699F4F18A3EAFC001433F3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE699F3118A3EAFC001433F3 /* UIKit.framework */; };
 		AE699F5718A3EAFC001433F3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AE699F5518A3EAFC001433F3 /* InfoPlist.strings */; };
 		AE699F5918A3EAFC001433F3 /* ClockAnimationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AE699F5818A3EAFC001433F3 /* ClockAnimationTests.m */; };
+		AE699F6418A3EF11001433F3 /* NSObject+performBlockAfterDelay.m in Sources */ = {isa = PBXBuildFile; fileRef = AE699F6318A3EF11001433F3 /* NSObject+performBlockAfterDelay.m */; };
+		AE699F6718A3F145001433F3 /* WTClockView.m in Sources */ = {isa = PBXBuildFile; fileRef = AE699F6618A3F145001433F3 /* WTClockView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,10 @@
 		AE699F5418A3EAFC001433F3 /* ClockAnimationTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ClockAnimationTests-Info.plist"; sourceTree = "<group>"; };
 		AE699F5618A3EAFC001433F3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AE699F5818A3EAFC001433F3 /* ClockAnimationTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClockAnimationTests.m; sourceTree = "<group>"; };
+		AE699F6218A3EF11001433F3 /* NSObject+performBlockAfterDelay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+performBlockAfterDelay.h"; sourceTree = "<group>"; };
+		AE699F6318A3EF11001433F3 /* NSObject+performBlockAfterDelay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+performBlockAfterDelay.m"; sourceTree = "<group>"; };
+		AE699F6518A3F145001433F3 /* WTClockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WTClockView.h; sourceTree = "<group>"; };
+		AE699F6618A3F145001433F3 /* WTClockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WTClockView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,11 +118,15 @@
 		AE699F3318A3EAFC001433F3 /* ClockAnimation */ = {
 			isa = PBXGroup;
 			children = (
+				AE699F6218A3EF11001433F3 /* NSObject+performBlockAfterDelay.h */,
+				AE699F6318A3EF11001433F3 /* NSObject+performBlockAfterDelay.m */,
 				AE699F3C18A3EAFC001433F3 /* AppDelegate.h */,
 				AE699F3D18A3EAFC001433F3 /* AppDelegate.m */,
 				AE699F3F18A3EAFC001433F3 /* Main.storyboard */,
 				AE699F4218A3EAFC001433F3 /* ViewController.h */,
 				AE699F4318A3EAFC001433F3 /* ViewController.m */,
+				AE699F6518A3F145001433F3 /* WTClockView.h */,
+				AE699F6618A3F145001433F3 /* WTClockView.m */,
 				AE699F4518A3EAFC001433F3 /* Images.xcassets */,
 				AE699F3418A3EAFC001433F3 /* Supporting Files */,
 			);
@@ -251,6 +261,8 @@
 			files = (
 				AE699F4418A3EAFC001433F3 /* ViewController.m in Sources */,
 				AE699F3E18A3EAFC001433F3 /* AppDelegate.m in Sources */,
+				AE699F6418A3EF11001433F3 /* NSObject+performBlockAfterDelay.m in Sources */,
+				AE699F6718A3F145001433F3 /* WTClockView.m in Sources */,
 				AE699F3A18A3EAFC001433F3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

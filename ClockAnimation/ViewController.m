@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "NSObject+performBlockAfterDelay.h"
 
 @interface ViewController ()
 
@@ -26,4 +27,18 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)handleStartButton:(id)sender
+{
+  theClockView.running = !theClockView.running;
+  
+  NSString *buttonTitle;
+  
+  if (theClockView.running)
+    buttonTitle = NSLocalizedString( @"Stop", nil);
+  else
+    buttonTitle  =  NSLocalizedString( @"Start", nil);
+  
+  [startButton setTitle: buttonTitle forState: UIControlStateNormal];
+
+}
 @end

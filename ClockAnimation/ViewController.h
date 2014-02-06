@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WTClockView.h"
 
 @interface ViewController : UIViewController
+{
+  __weak IBOutlet WTClockView *theClockView;
+  __weak IBOutlet UIButton *startButton;
+}
+- (IBAction)handleStartButton:(id)sender;
 
 @end
