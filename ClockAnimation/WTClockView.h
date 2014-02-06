@@ -8,16 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WTClockView : UIView
-{
-  __weak NSTimer *clockTimer;
-  NSCalendar *calendar;
-  
-//  CATextLayer *timeTextLayer;
-  UILabel *timeTextLabel;
-  NSDateFormatter *timeFormatter;
-}
-
 typedef struct
 {
   CGFloat hourHandAngle;
@@ -27,9 +17,22 @@ typedef struct
 } handAngles;
 
 
+
+@interface WTClockView : UIView
+{
+  __weak NSTimer *clockTimer;
+  NSCalendar *calendar;
+  
+  UILabel *timeTextLabel;
+  NSDateFormatter *timeFormatter;
+  handAngles oldHandAngles;
+}
+
+
 @property (nonatomic, weak)  IBOutlet UIImageView *hourHand;
 @property (nonatomic, weak)  IBOutlet UIImageView *minuteHand;
 @property (nonatomic, weak)  IBOutlet UIImageView *secondHand;
 
 @property (nonatomic, assign) BOOL running;
+
 @end

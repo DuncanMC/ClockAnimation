@@ -13,7 +13,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="nbJ-eJ-a3j" customClass="WTClockView">
-                                <rect key="frame" x="10" y="61" width="300" height="320"/>
+                                <rect key="frame" x="10" y="61" width="300" height="340"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="bZW-uA-ZPt">

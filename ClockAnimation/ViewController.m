@@ -15,30 +15,36 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
 
-- (void)didReceiveMemoryWarning
+//-----------------------------------------------------------------------------------------------------------
+#pragma mark - VC life cycle methods
+//-----------------------------------------------------------------------------------------------------------
+- (void) setClockRunningState: (BOOL) newState;
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (IBAction)handleStartButton:(id)sender
-{
-  theClockView.running = !theClockView.running;
-  
+  theClockView.running = newState;
   NSString *buttonTitle;
   
-  if (theClockView.running)
+  if (newState)
     buttonTitle = NSLocalizedString( @"Stop", nil);
   else
     buttonTitle  =  NSLocalizedString( @"Start", nil);
   
   [startButton setTitle: buttonTitle forState: UIControlStateNormal];
-
 }
+
+
+- (void) viewWillAppear:(BOOL)animated;
+{
+  [self setClockRunningState: YES];
+}
+
+//-----------------------------------------------------------------------------------------------------------
+#pragma mark - IBAction methods
+//-----------------------------------------------------------------------------------------------------------
+
+- (IBAction)handleStartButton:(id)sender
+{
+  [self setClockRunningState: !theClockView.running];
+}
+
 @end

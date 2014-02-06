@@ -7,6 +7,7 @@
 //
 
 #import "WTClockView.h"
+#import "NSObject+performBlockAfterDelay.h"
 
 @implementation WTClockView
 
@@ -48,7 +49,7 @@
   
   
   //Create an array of our labels for the clock face.
-  NSArray *numbers = @[@12, @3, @6, @9];
+  NSArray *numbers = @[@12, @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11];
   
   //Calculate the radius of the circle where we put our time labels.
   CGFloat radius = circle.bounds.size.width/2 - 10;
@@ -58,7 +59,7 @@
    ^(NSNumber *aNumber, NSUInteger  index, BOOL *stop)
    {
      //Calculate angles in pi/2 steps (quarter circles)
-     CGFloat angle = ((NSInteger)index-1) * M_PI_2;
+     CGFloat angle = ((NSInteger)index) * M_PI * 2/ [numbers count] - M_PI_2;
      
      //Calculate the x/y position for this label based on the angle
      CGFloat x = round(cosf(angle) * radius) + CGRectGetMidX(bounds);
@@ -84,10 +85,10 @@
    ];
   
   //Create a label for a digital time at the bottom of the clock face.
-  timeTextLabel = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 60, 18)];
+  timeTextLabel = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 100, 28)];
   timeTextLabel.textAlignment = NSTextAlignmentCenter;
-  timeTextLabel.font = [UIFont systemFontOfSize: 14];
-  timeTextLabel.center = CGPointMake( CGRectGetMidX(self.layer.bounds), self.layer.bounds.size.height- (timeTextLabel.bounds.size.height/2 +1)  );
+  timeTextLabel.font = [UIFont systemFontOfSize: 22];
+  timeTextLabel.center = CGPointMake( CGRectGetMidX(self.layer.bounds), self.layer.bounds.size.height- (timeTextLabel.bounds.size.height/2 +3)  );
   timeTextLabel.layer.borderWidth = 1;
   timeTextLabel.layer.borderColor = [UIColor lightGrayColor].CGColor;
   
@@ -145,12 +146,16 @@
 //This method animates a clock hand to a specific angle, using a spring animation.
 
 - (void) animateHandView: (UIView *) theHandView
-                 toAngle: (CGFloat) newAngle;
+                 toAngle: (CGFloat) newAngle
+                duration: (CGFloat) duration;
 {
+  CGFloat damping = .2;
+  if (duration > .4)
+    damping = .6;
   //Create the spring animation to the new angle. The clock hands rotate around their geometric centers
-  [UIView animateWithDuration: .2
+  [UIView animateWithDuration: duration
                         delay: 0
-       usingSpringWithDamping: 0.2
+       usingSpringWithDamping: damping
         initialSpringVelocity: .8
                       options: 0
                    animations: ^
@@ -209,10 +214,31 @@
   }
   else
   {
-    [self animateHandView: _hourHand toAngle: theHandAngles.hourHandAngle];
-    [self animateHandView: _minuteHand toAngle: theHandAngles.minuteHandAngle];
-    [self animateHandView: _secondHand toAngle: theHandAngles.secondHandAngle];
-  }
+    CGFloat duration;
+    BOOL big_change;
+    
+    {
+      big_change = fabs(theHandAngles.secondHandAngle - oldHandAngles.secondHandAngle) > M_PI_4;
+      duration = big_change ? .6 : .3;
+      [self animateHandView: _secondHand toAngle: theHandAngles.secondHandAngle duration: duration];
+    }
+    [self performBlockOnMainQueue: ^
+     {
+       CGFloat duration;
+       BOOL big_change;
+       big_change = fabs(theHandAngles.minuteHandAngle - oldHandAngles.minuteHandAngle) > M_PI_4;
+       duration = big_change ? .6 : .3;
+       [self animateHandView: _minuteHand toAngle: theHandAngles.minuteHandAngle duration: duration];
+       
+       big_change = fabs(theHandAngles.hourHandAngle - oldHandAngles.hourHandAngle) > M_PI_4;
+       duration = big_change ? .6 : .3;
+       [self animateHandView: _hourHand toAngle: theHandAngles.hourHandAngle duration: duration];
+     }
+                       afterDelay: .05];
+    
+}
+  
+  oldHandAngles = theHandAngles;
   
   if (!timeFormatter)
   {
