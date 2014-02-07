@@ -27,7 +27,7 @@
   if (newState)
     buttonTitle = NSLocalizedString( @"Stop", nil);
   else
-    buttonTitle  =  NSLocalizedString( @"Start", nil);
+    buttonTitle  =  NSLocalizedString( @"Run", nil);
   
   [startButton setTitle: buttonTitle forState: UIControlStateNormal];
 }
@@ -35,7 +35,15 @@
 
 - (void) viewWillAppear:(BOOL)animated;
 {
+//  [theClockView setTimeWithTimeString: @"9:14:30"];
   [self setClockRunningState: YES];
+  
+//  UIGraphicsBeginImageContextWithOptions(theClockView.bounds.size, NO, 0.0);
+//
+//  [theClockView drawViewHierarchyInRect:theClockView.bounds afterScreenUpdates:NO];
+//  UIImage *clockImage = UIGraphicsGetImageFromCurrentImageContext();
+//  UIGraphicsEndImageContext();
+
 }
 
 //-----------------------------------------------------------------------------------------------------------

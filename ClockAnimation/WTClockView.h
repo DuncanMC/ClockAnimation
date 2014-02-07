@@ -37,4 +37,9 @@ typedef struct
 
 @property (nonatomic, assign) BOOL running;
 
+- (void) setTimeToDate: (NSDate *)date animated: (BOOL) animated;
+- (void) setTimeToNowAnimated: (BOOL) animated;
+- (void) setTimeToTenTen;
+- (void) setTimeWithTimeString: (NSString *) timeString;;
+
 @end

@@ -23,6 +23,8 @@
                                                                               usingBlock: ^(NSNotification *note)
                                  
                                  {
+                                   //NSLog(@"Returning from background");
+                                   [self setTimeToNowAnimated: NO];
                                    if (self.running)
                                      self.running = YES;
                                  }
@@ -34,6 +36,7 @@
                                                                               usingBlock: ^(NSNotification *note)
                                  
                                  {
+                                   //NSLog(@"Exiting to background");
                                    [clockTimer invalidate];
                                  }
                                  ];
@@ -154,9 +157,17 @@
   _hourHand.alpha = .5;
   _minuteHand.alpha = .5;
   _secondHand.alpha = .5;
-  
 }
 
+//-----------------------------------------------------------------------------------------------------------
+- (void) dealloc;
+{
+  [[NSNotificationCenter defaultCenter] removeObserver: enterBackgroundNotification];
+  enterBackgroundNotification = nil;
+
+  [[NSNotificationCenter defaultCenter] removeObserver: enterForegroundNotification];
+  enterForegroundNotification = nil;
+}
 //-----------------------------------------------------------------------------------------------------------
 #pragma mark - property  methods
 //-----------------------------------------------------------------------------------------------------------
@@ -310,12 +321,32 @@
 }
 
 //-----------------------------------------------------------------------------------------------------------
+
 //Set the time to the current NSDate.
 //If animated = FALSE, set the hands without animating them.
+
+//-----------------------------------------------------------------------------------------------------------
 
 - (void) setTimeToNowAnimated: (BOOL) animated;
 {
   [self setTimeToDate: [NSDate date] animated: animated];
+}
+
+//-----------------------------------------------------------------------------------------------------------
+- (void) setTimeWithTimeString: (NSString *) timeString;
+{
+  NSDate *date = [timeFormatter dateFromString: timeString];
+  [self setTimeToDate: date animated: NO];
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+- (void) setTimeToTenTen;
+{
+  NSString *tenTenString = @"10:10:30";
+  [self setTimeWithTimeString: tenTenString];
+  NSDate *tenTen = [timeFormatter dateFromString: tenTenString];
+  [self setTimeToDate: tenTen animated: NO];
 }
 //-----------------------------------------------------------------------------------------------------------
 
