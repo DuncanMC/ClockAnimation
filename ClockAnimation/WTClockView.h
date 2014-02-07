@@ -26,6 +26,8 @@ typedef struct
   UILabel *timeTextLabel;
   NSDateFormatter *timeFormatter;
   handAngles oldHandAngles;
+  id enterBackgroundNotification;
+  id enterForegroundNotification;
 }
 
 

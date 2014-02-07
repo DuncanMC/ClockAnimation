@@ -12,11 +12,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="nbJ-eJ-a3j" customClass="WTClockView">
+                            <view opaque="NO" contentMode="scaleToFill" id="nbJ-eJ-a3j" customClass="WTClockView">
                                 <rect key="frame" x="10" y="61" width="300" height="340"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" id="bZW-uA-ZPt">
+                                    <view opaque="NO" contentMode="scaleToFill" id="bZW-uA-ZPt">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="300"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
@@ -35,10 +35,10 @@
                                                 <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             </imageView>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="hourHand" destination="u03-uh-2jM" id="kOc-rb-QlS"/>
                                     <outlet property="minuteHand" destination="NPK-8G-3yq" id="iVd-Dn-hqh"/>

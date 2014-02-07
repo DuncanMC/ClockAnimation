@@ -14,13 +14,51 @@
 //-----------------------------------------------------------------------------------------------------------
 #pragma mark - object lifecycle methods
 //-----------------------------------------------------------------------------------------------------------
+- (void) doInitSetup;
+{
+  enterForegroundNotification = [[NSNotificationCenter defaultCenter] addObserverForName: UIApplicationWillEnterForegroundNotification
+                                 
+                                                                                  object: nil
+                                                                                   queue: nil
+                                                                              usingBlock: ^(NSNotification *note)
+                                 
+                                 {
+                                   if (self.running)
+                                     self.running = YES;
+                                 }
+                                 ];
+  enterBackgroundNotification = [[NSNotificationCenter defaultCenter] addObserverForName: UIApplicationDidEnterBackgroundNotification
+                                 
+                                                                                  object: nil
+                                                                                   queue: nil
+                                                                              usingBlock: ^(NSNotification *note)
+                                 
+                                 {
+                                   [clockTimer invalidate];
+                                 }
+                                 ];
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+- (id) initWithCoder:(NSCoder *)aDecoder;
+{
+  self = [super initWithCoder: aDecoder];
+  if (self)
+    [self doInitSetup];
+  return self;
+}
+
+//-----------------------------------------------------------------------------------------------------------
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
+    if (self)
+    {
+      [self doInitSetup];
     }
+
     return self;
 }
 
@@ -44,9 +82,25 @@
   circle.cornerRadius = bounds.size.width/2;
   circle.borderWidth = 1;
   circle.borderColor = [UIColor lightGrayColor].CGColor;
-  circle.position = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
-  [self.layer addSublayer: circle];
+  circle.backgroundColor = [UIColor colorWithRed: 1.0 green: 1.0 blue: 183/255.0 alpha: 1.0].CGColor;
+  CGPoint position = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));
+  position = [self.superview convertPoint: position fromView: self];
+  circle.position = position;
+  [self.layer.superlayer insertSublayer: circle  below:self.layer];
   
+  UIImage *wareToImage = [UIImage imageNamed: @"wareto logo 120x92"];
+  
+  CALayer *imageLayer = [CALayer layer];
+  CGRect imageBounds = CGRectMake(0,0, wareToImage.size.width, wareToImage.size.height);
+  position = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds) - 75);
+
+  imageLayer.bounds = imageBounds;
+  imageLayer.position = position;
+  imageLayer.contents = (id) wareToImage.CGImage;
+  [circle addSublayer: imageLayer];
+  
+  
+
   
   //Create an array of our labels for the clock face.
   NSArray *numbers = @[@12, @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11];
@@ -84,7 +138,8 @@
    }
    ];
   
-  //Create a label for a digital time at the bottom of the clock face.
+  //Create a label for a
+  //digital time at the bottom of the clock face.
   timeTextLabel = [[UILabel alloc] initWithFrame: CGRectMake(0, 0, 100, 28)];
   timeTextLabel.textAlignment = NSTextAlignmentCenter;
   timeTextLabel.font = [UIFont systemFontOfSize: 22];
@@ -95,6 +150,11 @@
   [self addSubview: timeTextLabel];
 
   [self setTimeToNowAnimated: NO];
+  
+  _hourHand.alpha = .5;
+  _minuteHand.alpha = .5;
+  _secondHand.alpha = .5;
+  
 }
 
 //-----------------------------------------------------------------------------------------------------------
