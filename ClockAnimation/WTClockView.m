@@ -192,7 +192,7 @@
     //Figure out the NSTimeInterval for the next even second.
     NSTimeInterval nextSecondInterval = floor([NSDate timeIntervalSinceReferenceDate]) + 1;
     
-    //Create an NSTime for that instant in time.
+    //Create an NSDate for that instant in time.
     NSDate *nextSecond = [NSDate dateWithTimeIntervalSinceReferenceDate: nextSecondInterval];
     
     //Create a repeating timer that fires on the next even time interval.
