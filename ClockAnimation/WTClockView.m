@@ -106,17 +106,24 @@
 
   
   //Create an array of our labels for the clock face.
-  NSArray *numbers = @[@12, @1, @2, @3, @4, @5, @6, @7, @8, @9, @10, @11];
+  NSArray *labelStrings;
+  labelStrings = @[@"12", @"1", @"2", @"3", @"4", @"5", @"6", @"7", @"8", @"9", @"10", @"11"];
+
+  //Un-comment this line to use only the 12, 3, 6, and 9 labels.
+  //numbers = @[@"12", @"3", @"6", @"9"];
+
+  //Un-comment the line below to use roman numerals instead of normal numbers.
+  //numbers = @[@"XII", @"I", @"II", @"III", @"IV", @"V", @"VI", @"VII", @"VIII", @"IX", @"X", @"XI"];
   
   //Calculate the radius of the circle where we put our time labels.
   CGFloat radius = circle.bounds.size.width/2 - 10;
   
-  //Loop through the 4 time values.
-  [numbers enumerateObjectsUsingBlock:
-   ^(NSNumber *aNumber, NSUInteger  index, BOOL *stop)
+  //Loop through the time values.
+  [labelStrings enumerateObjectsUsingBlock:
+   ^(NSString *aLabelString, NSUInteger  index, BOOL *stop)
    {
      //Calculate angles in pi/2 steps (quarter circles)
-     CGFloat angle = ((NSInteger)index) * M_PI * 2/ [numbers count] - M_PI_2;
+     CGFloat angle = ((NSInteger)index) * M_PI * 2/ [labelStrings count] - M_PI_2;
      
      //Calculate the x/y position for this label based on the angle
      CGFloat x = round(cosf(angle) * radius) + CGRectGetMidX(bounds);
@@ -133,7 +140,7 @@
      aLabel.center = center;
      aLabel.textAlignment = NSTextAlignmentCenter;
 
-     aLabel.text = [NSString stringWithFormat: @"%d", [aNumber integerValue]];
+     aLabel.text = aLabelString;
 
      //Finally, add the label to the clock view.
      [self addSubview: aLabel];
